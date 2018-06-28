@@ -7,7 +7,7 @@
 $(window).on('load', resetBoard);
 
  function resetBoard () {
-  let cardIcons = ["fa fa-diamond", "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o"]; // our array of card icons
+  let cardIcons = ["fa fa-diamond", "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o"]; // our deck of card icons
   let cardSets = shuffle(cardIcons).concat(shuffle(cardIcons)); // create sets by shuffling two decks together
   // For each card in the deck, add a random icon.
    $('#deck').children('li').each(function (index) {
