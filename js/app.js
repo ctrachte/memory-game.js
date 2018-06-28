@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cardIcons = ["fa-diamond", "fa-cube","fa-bolt","fa-leaf","fa-bicycle","fa-paper-plane-o","fa-anchor"]
 
 /*
  * Display the cards on the page
