@@ -1,23 +1,28 @@
-$(window).on('load', resetBoard);
+$(window).on('load', resetBoard); // ensures a fresh board when the page is refreshed or loaded
 
-
-//new game buttons
+//new game button event handlers
 $('#newGameMain').click(function () {
-  clearInterval(timer);
-  resetBoard();
+  clearInterval(timer); // clear the timer out
+  resetBoard(); //reset the board
 });
 $('#newGameModal').click(function () {
   clearInterval(timer);
   resetBoard();
 });
 
+// resets the entire game board
 function resetBoard () {
+
   setTimer();
 
   $('.card').removeClass('flippable');
+
   $('.card').removeClass('show');
+
   $('.card').removeClass('open');
+
   $('.card').addClass('flippable');
+
   $('.stars').html(
     `
     <li><i class="fa fa-star"></i></li>
@@ -25,7 +30,7 @@ function resetBoard () {
     <li><i class="fa fa-star"></i></li>
     `
    );
-   moves=[9];
+   moves=[9]; // reset moves
    $('.moves').text(moves);
 
   let cardIcons = ["fa fa-diamond", "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o","fa fa-diamond",
@@ -41,6 +46,7 @@ function resetBoard () {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
+
     let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -54,40 +60,43 @@ function shuffle(array) {
     return array;
 }
 
+// declaring a variable to store our timer
+let timer;
+
 // tracks how many cards you've flipped.
 let cardsFlipped = [];
+
 // tracks the specific card ids to prevent double clicking
 let cardIDs = [];
+
 // tracks the games matched sets
 let matches = [];
+
 // tracks remaining attempts
 let moves = 9;
 
 // displays Timer
 function getTime(totalSec) {
- function formatTime(x) {
-   return ( x < 10 ? "0" : "" ) + x;
- }
 
- let hours = Math.floor(totalSec / 3600);
- totalSec = totalSec % 3600;
+  function formatTime(x) {
+    return ( x < 10 ? "0" : "" ) + x;
+  }
 
- let minutes = Math.floor(totalSec / 60);
- totalSec = totalSec % 60;
+  let hours = Math.floor(totalSec / 3600);
+  totalSec = totalSec % 3600;
 
- let seconds = Math.floor(totalSec);
+  let minutes = Math.floor(totalSec / 60);
+  totalSec = totalSec % 60;
 
- // Pad the minutes and seconds with leading zeros, if required
- minutes = formatTime(minutes);
- seconds = formatTime(seconds);
+  let seconds = Math.floor(totalSec);
 
- // Compose the string for display
- let timeString = minutes + ":" + seconds;
+  minutes = formatTime(minutes);
+  seconds = formatTime(seconds);
 
- return timeString;
+  let timeString = minutes + ":" + seconds;
+
+  return timeString;
 }
-
-let timer;
 
 function setTimer () {
   let elapsed_seconds = 0;
@@ -96,7 +105,6 @@ function setTimer () {
    $('.Timer').text(getTime(elapsed_seconds));
   }, 1000);
 }
-
 
 // reduces player moves and star rating
 function reduceMoves () {
@@ -126,15 +134,28 @@ function showCard (obj) {
 
 // checks if all matches are flipped, or if moves are gone
 function showGameResult () {
-  if ($( ".flippable" ).length === 2 && $('.show').length === 12) {
-    $('#win-lose-modal-Label').text('You Win!');
-    $('#win-lose-modal').modal('show');
-  } else if (moves === 0) {
-    $('#win-lose-modal-Label').text('You Lose!');
-    $('#win-lose-modal').modal('show');
+  if ($( ".flippable" ).length === 2 && $('.show').length === 12) { // we pop up a winner modal
+    $('.modal-body').html(
+      `
+      <div class="score-item">Your Time: ${$('.Timer').text()}</div>
+      <div class="score-item">Your Score: ${$('.stars').html()}<div>
+      `
+    );
+    $('#endGameModalLabel').text('You Win!');
+    $('#endGameModal').modal('show');
     clearInterval(timer);
     resetBoard();
-  } else {
+  } else if (moves === 0) { // else we pop up a loser modal
+    $('.modal-body').html(
+      `
+      <div class="score-item">Your Time: ${$('.Timer').text()}</div>
+      `
+    );
+    $('#endGameModalLabel').text('You Lose!');
+    $('#endGameModal').modal('show');
+    clearInterval(timer);
+    resetBoard();
+  } else { // not the end of the game!
     return;
   }
 }

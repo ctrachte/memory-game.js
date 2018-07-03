@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Caleb's Matching Game</title>
+    <title>Matcharoni and Cheese</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
@@ -14,22 +14,20 @@
 
     <div class="container">
         <header>
-            <h1>Matching Game</h1>
+            <h1>Matcharoni and Cheese!</h1>
             <button id="newGameMain" class="btn btn-outline-info btn-lg btn-block">
               New Game
             </button>
         </header>
 
         <section>
-          <div class="modal fade" id="win-lose-modal" tabindex="-1" role="dialog" aria-labelledby="win-lose-modal-Label" aria-hidden="true">
+          <div class="modal fade" id="endGameModal" tabindex="-1" role="dialog" aria-labelledby="win-lose-modal-Label" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="win-lose-modal-Label"></h5>
+                  <h5 class="modal-title" id="endGameModalLabel"></h5>
                 </div>
                 <div class="modal-body">
-                  <span id="end-time">Your time: </span>
-                  <span id="end-moves">Your total moves: </span>
                 </div>
                 <div class="modal-footer">
                   <button type="button" id="newGameModal" data-dismiss="modal" class="btn btn-outline-info btn-block">New Game</button>
@@ -40,15 +38,15 @@
         </section>
 
         <section class="score-panel">
-
+          <span>Score:</span>
         	<ul class="stars">
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">9</span> Moves Remaining
-          <span class="Timer"></span> Time
+        	<span>Moves:</span><span class="moves">9</span>
+          <span>Time:</span><span class="Timer"></span>
 
         </section>
 

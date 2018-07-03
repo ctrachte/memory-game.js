@@ -21,6 +21,11 @@ body {
     font-family: 'Coda', cursive;
 }
 
+header {
+  margin-top:1.5em;
+  margin-bottom:1.5em;
+}
+
 span {
   margin-left: 10px;
 }
@@ -105,6 +110,21 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+}
+
+.modal-body {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+li {
+  list-style: none;
+  display: inline-block;
+}
+
+.score-item {
+  margin-left: 10px;
 }
 
 .score-panel .stars li {
