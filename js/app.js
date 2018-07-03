@@ -42,7 +42,6 @@ let hideCards = () => {
   $('.flippable').removeClass('open');
   cardsFlipped = [];
   cardIDs = [];
-  clearTimeout();
 }
 
 function showCard (obj) {
@@ -52,8 +51,17 @@ function showCard (obj) {
   $(obj).addClass('open');
 }
 
+function showGameResult () {
+  if (matches.length === 5) {
+    $('#win-lose-modal').modal('show');
+  } else {
+    return;
+  }
+}
+
 // Card click event handler
  $('.flippable').click(function () {
+   showGameResult();
    if (cardsFlipped.length===0) {
      showCard(this);
    } else if (cardsFlipped.length===1) {
