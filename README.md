@@ -2,9 +2,9 @@
 
 ## Table of Contents
 
-* [Getting Started](#Getting Started)
+* [Getting Started](#Getting_Started)
 * [Dependencies](#dependencies)
-* [Playing the Game](#Playing the Game)
+* [Playing the Game](#Playing_the_Game)
 
 ## Getting Started
  - Clone or download this repository
