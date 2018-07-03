@@ -47,8 +47,9 @@ let cardIDs = [];
 // tracks the games matched sets
 let matches = [];
 // tracks remaining attempts
-let moves = 10;
+let moves = 9;
 
+// reduces player moves and star rating
 function reduceMoves () {
   moves--;
   $('.moves').text(moves);
@@ -58,7 +59,7 @@ function reduceMoves () {
 }
 
 // hides card icons (flips them back)
-let hideCards = () => {
+function hideCards () {
   $('.flippable').removeClass('show');
   $('.flippable').removeClass('open');
   cardsFlipped = [];
