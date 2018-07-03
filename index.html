@@ -15,6 +15,9 @@
     <div class="container">
         <header>
             <h1>Matching Game</h1>
+            <button id="newGameMain" class="btn btn-outline-info btn-lg btn-block">
+              New Game
+            </button>
         </header>
 
         <section>
@@ -29,7 +32,7 @@
                   <span id="end-moves">Your total moves: </span>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-dismiss="modal" class="btn btn-primary restart">New Game</button>
+                  <button type="button" id="newGameModal" data-dismiss="modal" class="btn btn-outline-info btn-block">New Game</button>
                 </div>
               </div>
             </div>
@@ -44,12 +47,9 @@
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">9</span> Moves
+        	<span class="moves">9</span> Moves Remaining
           <span class="Timer"></span> Time
 
-          <div class="restart">
-        		New Game
-        	</div>
         </section>
 
         <ul id="deck" class="deck">

@@ -1,6 +1,12 @@
 $(window).on('load', resetBoard);
 
-$('.restart').click(function () {
+
+//new game buttons
+$('#newGameMain').click(function () {
+  clearInterval(timer);
+  resetBoard();
+});
+$('#newGameModal').click(function () {
   clearInterval(timer);
   resetBoard();
 });
@@ -58,36 +64,36 @@ let matches = [];
 let moves = 9;
 
 // displays Timer
-function get_elapsed_time_string(total_seconds) {
- function pretty_time_string(num) {
-   return ( num < 10 ? "0" : "" ) + num;
+function getTime(totalSec) {
+ function formatTime(x) {
+   return ( x < 10 ? "0" : "" ) + x;
  }
 
- let hours = Math.floor(total_seconds / 3600);
- total_seconds = total_seconds % 3600;
+ let hours = Math.floor(totalSec / 3600);
+ totalSec = totalSec % 3600;
 
- let minutes = Math.floor(total_seconds / 60);
- total_seconds = total_seconds % 60;
+ let minutes = Math.floor(totalSec / 60);
+ totalSec = totalSec % 60;
 
- let seconds = Math.floor(total_seconds);
+ let seconds = Math.floor(totalSec);
 
  // Pad the minutes and seconds with leading zeros, if required
- hours = pretty_time_string(hours);
- minutes = pretty_time_string(minutes);
- seconds = pretty_time_string(seconds);
+ minutes = formatTime(minutes);
+ seconds = formatTime(seconds);
 
  // Compose the string for display
- let currentTimeString = hours + ":" + minutes + ":" + seconds;
+ let timeString = minutes + ":" + seconds;
 
- return currentTimeString;
+ return timeString;
 }
 
 let timer;
+
 function setTimer () {
   let elapsed_seconds = 0;
   timer = setInterval(function() {
    elapsed_seconds++;
-   $('.Timer').text(get_elapsed_time_string(elapsed_seconds));
+   $('.Timer').text(getTime(elapsed_seconds));
   }, 1000);
 }
 
@@ -97,7 +103,7 @@ function reduceMoves () {
   moves--;
   $('.moves').text(moves);
   if (moves === 6 || moves === 3) {
-    $('.stars').find('li:first').remove();
+    $('.stars').find('li:last').remove();
   }
 }
 
@@ -126,6 +132,7 @@ function showGameResult () {
   } else if (moves === 0) {
     $('#win-lose-modal-Label').text('You Lose!');
     $('#win-lose-modal').modal('show');
+    clearInterval(timer);
     resetBoard();
   } else {
     return;

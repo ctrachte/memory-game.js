@@ -21,6 +21,15 @@ body {
     font-family: 'Coda', cursive;
 }
 
+span {
+  margin-left: 10px;
+}
+
+button:focus,button:active {
+   outline: none !important;
+   box-shadow: none !important;
+}
+
 .container {
     display: flex;
     justify-content: center;
