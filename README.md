@@ -1,20 +1,24 @@
-# Memory Game Project
+# Memory Game  - 'Matcharoni and Cheese'
 
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Dependencies](#dependencies)
 
 ## Instructions
+ - Clone or download this repository
+ - Start index.html
+ **Playing the game**
+ - Game begins automatically on page load
+ - New game resets the games
+ - Time indicates the elapsed time from game start (the less time the better!)
+ - Moves indicates how many matches you can attempt
+ - Score (stars) indicates how well you are doing based on remaining attempts
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Dependencies
+**All dependencies included via CDN links in the `index.html` script tags.**
+They are as follows:
+ - jQuery
+ - Font Awesome
+ - Bootstrap
+ - Coda (font)
