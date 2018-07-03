@@ -1,24 +1,32 @@
 $(window).on('load', resetBoard);
 
- function resetBoard () {
-   $('.card').removeClass('flippable');
-   $('.card').removeClass('show');
-   $('.card').removeClass('open');
-   $('.card').addClass('flippable');
-   $('.stars').html(
-     `
-     <li><i class="fa fa-star"></i></li>
-     <li><i class="fa fa-star"></i></li>
-     <li><i class="fa fa-star"></i></li>
-     `
-   );
+$('.restart').click(function () {
+  clearInterval(timer);
+  resetBoard();
+});
 
-   moves=[10];
+function resetBoard () {
+  setTimer();
+
+  $('.card').removeClass('flippable');
+  $('.card').removeClass('show');
+  $('.card').removeClass('open');
+  $('.card').addClass('flippable');
+  $('.stars').html(
+    `
+    <li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>
+    <li><i class="fa fa-star"></i></li>
+    `
+   );
+   moves=[9];
    $('.moves').text(moves);
 
   let cardIcons = ["fa fa-diamond", "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o","fa fa-diamond",
-   "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o"]; // our deck of card icons
+    "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o"]; // our deck of card icons
+
   let cardSets = shuffle(cardIcons); // shuffles deck
+
   // For each card in the deck, add a random icon.
    $('#deck').children('li').each(function (index) {
      this.children[0].className = cardSets[index];
@@ -48,6 +56,41 @@ let cardIDs = [];
 let matches = [];
 // tracks remaining attempts
 let moves = 9;
+
+// displays Timer
+function get_elapsed_time_string(total_seconds) {
+ function pretty_time_string(num) {
+   return ( num < 10 ? "0" : "" ) + num;
+ }
+
+ let hours = Math.floor(total_seconds / 3600);
+ total_seconds = total_seconds % 3600;
+
+ let minutes = Math.floor(total_seconds / 60);
+ total_seconds = total_seconds % 60;
+
+ let seconds = Math.floor(total_seconds);
+
+ // Pad the minutes and seconds with leading zeros, if required
+ hours = pretty_time_string(hours);
+ minutes = pretty_time_string(minutes);
+ seconds = pretty_time_string(seconds);
+
+ // Compose the string for display
+ let currentTimeString = hours + ":" + minutes + ":" + seconds;
+
+ return currentTimeString;
+}
+
+let timer;
+function setTimer () {
+  let elapsed_seconds = 0;
+  timer = setInterval(function() {
+   elapsed_seconds++;
+   $('.Timer').text(get_elapsed_time_string(elapsed_seconds));
+  }, 1000);
+}
+
 
 // reduces player moves and star rating
 function reduceMoves () {
