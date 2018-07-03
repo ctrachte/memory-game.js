@@ -2,13 +2,15 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [Getting Started](#Getting Started)
 * [Dependencies](#dependencies)
+* [Playing the Game](#Playing the Game)
 
-## Instructions
+## Getting Started
  - Clone or download this repository
  - Start index.html
- **Playing the game**
+ 
+## Playing the game
  - Game begins automatically on page load
  - New game resets the games
  - Time indicates the elapsed time from game start (the less time the better!)
