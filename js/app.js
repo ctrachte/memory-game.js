@@ -5,6 +5,14 @@ $(window).on('load', resetBoard);
    $('.card').removeClass('show');
    $('.card').removeClass('open');
    $('.card').addClass('flippable');
+   $('.stars').html(
+     `
+     <li><i class="fa fa-star"></i></li>
+     <li><i class="fa fa-star"></i></li>
+     <li><i class="fa fa-star"></i></li>
+     `
+   );
+
    moves=[10];
    $('.moves').text(moves);
 
@@ -41,8 +49,12 @@ let matches = [];
 // tracks remaining attempts
 let moves = 10;
 
-function updateMoves () {
-
+function reduceMoves () {
+  moves--;
+  $('.moves').text(moves);
+  if (moves === 6 || moves === 3) {
+    $('.stars').find('li:first').remove();
+  }
 }
 
 // hides card icons (flips them back)
@@ -89,8 +101,7 @@ function showGameResult () {
        hideCards();
        showCard(this);
      } else {
-       moves--;
-       $('.moves').text(moves);
+       reduceMoves();
        hideCards();
        showCard(this);
      }
