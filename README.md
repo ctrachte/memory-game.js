@@ -24,3 +24,5 @@ They are as follows:
  - Font Awesome
  - Bootstrap
  - Coda (font)
+
+[This project was built from this starter code.](https://github.com/udacity/fend-project-memory-game)
