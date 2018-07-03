@@ -5,6 +5,9 @@ $(window).on('load', resetBoard);
    $('.card').removeClass('show');
    $('.card').removeClass('open');
    $('.card').addClass('flippable');
+   moves=[10];
+   $('.moves').text(moves);
+
   let cardIcons = ["fa fa-diamond", "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o","fa fa-diamond",
    "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o"]; // our deck of card icons
   let cardSets = shuffle(cardIcons); // shuffles deck
@@ -35,6 +38,12 @@ let cardsFlipped = [];
 let cardIDs = [];
 // tracks the games matched sets
 let matches = [];
+// tracks remaining attempts
+let moves = 10;
+
+function updateMoves () {
+
+}
 
 // hides card icons (flips them back)
 let hideCards = () => {
@@ -44,16 +53,24 @@ let hideCards = () => {
   cardIDs = [];
 }
 
+// shows cards, flips them
 function showCard (obj) {
   cardsFlipped.push(obj.children[0].className);
   cardIDs.push(obj.id);
   $(obj).addClass('show');
   $(obj).addClass('open');
+  showGameResult();
 }
 
+// checks if all matches are flipped, or if moves are gone
 function showGameResult () {
-  if (matches.length === 5) {
+  if ($( ".flippable" ).length === 2 && $('.show').length === 12) {
+    $('#win-lose-modal-Label').text('You Win!');
     $('#win-lose-modal').modal('show');
+  } else if (moves === 0) {
+    $('#win-lose-modal-Label').text('You Lose!');
+    $('#win-lose-modal').modal('show');
+    resetBoard();
   } else {
     return;
   }
@@ -61,7 +78,6 @@ function showGameResult () {
 
 // Card click event handler
  $('.flippable').click(function () {
-   showGameResult();
    if (cardsFlipped.length===0) {
      showCard(this);
    } else if (cardsFlipped.length===1) {
@@ -73,6 +89,8 @@ function showGameResult () {
        hideCards();
        showCard(this);
      } else {
+       moves--;
+       $('.moves').text(moves);
        hideCards();
        showCard(this);
      }
