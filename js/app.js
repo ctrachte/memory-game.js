@@ -30,7 +30,11 @@ function resetBoard () {
     <li><i class="fa fa-star"></i></li>
     `
    );
-   moves=[9]; // reset moves
+   moves = [9]; // reset moves
+   cardIDs = [];
+   cardsFlipped = [];
+   matches = [];
+
    $('.moves').text(moves);
 
   let cardIcons = ["fa fa-diamond", "fa fa-cube","fa fa-bolt","fa fa-leaf","fa fa-bicycle","fa fa-paper-plane-o","fa fa-diamond",
@@ -117,16 +121,18 @@ function reduceMoves () {
 
 // hides card icons (flips them back)
 function hideCards () {
+  $('.flippable').on('click', function () {
+    handleClick($(this));
+  })
   $('.flippable').removeClass('show');
   $('.flippable').removeClass('open');
   cardsFlipped = [];
   cardIDs = [];
 }
-
 // shows cards, flips them
 function showCard (obj) {
-  cardsFlipped.push(obj.children[0].className);
-  cardIDs.push(obj.id);
+  cardsFlipped.push(obj[0].children[0].className);
+  cardIDs.push(obj[0].id);
   $(obj).addClass('show');
   $(obj).addClass('open');
   showGameResult();
@@ -161,21 +167,27 @@ function showGameResult () {
 }
 
 // Card click event handler
- $('.flippable').click(function () {
-   if (cardsFlipped.length===0) {
-     showCard(this);
-   } else if (cardsFlipped.length===1) {
-     showCard(this);
+ $('.flippable').on('click', function () {
+   handleClick($(this));
+ });
+
+// function that handles click
+function handleClick(obj) {
+  console.log(obj);
+ if (cardsFlipped.length===0) {
+   showCard(obj);
+ } else {
+   showCard(obj);
+   $('.flippable').off();
+   if (cardsFlipped[0] === cardsFlipped[1] && cardIDs[0] !== cardIDs[1]) {
+     $('.open').removeClass('flippable');
+     matches.push(cardIDs);
+     hideCards();
+   } else if (cardIDs[0] === cardIDs[1]){
+     setTimeout(hideCards,1000);
    } else {
-     if (cardsFlipped[0] === cardsFlipped[1] && cardIDs[0] !== cardIDs[1]) {
-       $('.open').removeClass('flippable');
-       matches.push(cardIDs);
-       hideCards();
-       showCard(this);
-     } else {
-       reduceMoves();
-       hideCards();
-       showCard(this);
-     }
+     setTimeout(hideCards,1000);
+     reduceMoves();
    }
- })
+ }
+}
