@@ -90,10 +90,10 @@ h1 {
 }
 
 .deck .card.red {
-  border-color: red;
+  background-color: red;
 }
 .deck .card.green {
-  border-color: green;
+  background-color: green;
 }
 
 .deck .card.match {

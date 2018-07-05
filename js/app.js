@@ -1,6 +1,6 @@
 $(window).on('load', resetBoard); // ensures a fresh board when the page is refreshed or loaded
 
-//new game button event handlers
+//new game button event listeners for popup modal and home screen
 $('#newGameMain').click(function () {
   clearInterval(timer); // clear the timer out
   resetBoard(); //reset the board
@@ -10,10 +10,19 @@ $('#newGameModal').click(function () {
   resetBoard();
 });
 
+// Assign click event listener to all cards
+ $('.flippable').on('click', function () {
+   handleClick($(this));
+ });
+
 // resets the entire game board
 function resetBoard () {
 
   setTimer();
+
+  $('.card').removeClass('red');
+
+  $('.card').removeClass('green');
 
   $('.card').removeClass('flippable');
 
@@ -126,11 +135,13 @@ function hideCards () {
     handleClick($(this));
   })
   //clear all non-matches
+  $('.card').removeClass('red');
   $('.flippable').removeClass('show');
   $('.flippable').removeClass('open');
   //reset our arrays
   cardsFlipped = [];
   cardIDs = [];
+  showGameResult();
 }
 // shows cards, flips them
 function showCard (obj) {
@@ -169,11 +180,6 @@ function showGameResult () {
   }
 }
 
-// Assign click event listener to all cards
- $('.flippable').on('click', function () {
-   handleClick($(this));
- });
-
 // function that handles click
 function handleClick(obj) {
  if (cardsFlipped.length===0) {
@@ -183,11 +189,14 @@ function handleClick(obj) {
    $('.flippable').off(); // remove event listener from all cards so user cant keep clicking
    if (cardsFlipped[0] === cardsFlipped[1] && cardIDs[0] !== cardIDs[1]) {
      $('.open').removeClass('flippable');
+     $('.open').addClass('green');
      matches.push(cardIDs);
      hideCards();
    } else if (cardIDs[0] === cardIDs[1]){
      setTimeout(hideCards,1000);
+     $('.open').addClass('red');
    } else {
+     $('.open').addClass('red');
      setTimeout(hideCards,1000);
      reduceMoves();
    }
