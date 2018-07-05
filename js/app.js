@@ -121,11 +121,14 @@ function reduceMoves () {
 
 // hides card icons (flips them back)
 function hideCards () {
+  // first add event listeners back to all unmatched cards
   $('.flippable').on('click', function () {
     handleClick($(this));
   })
+  //clear all non-matches
   $('.flippable').removeClass('show');
   $('.flippable').removeClass('open');
+  //reset our arrays
   cardsFlipped = [];
   cardIDs = [];
 }
@@ -166,7 +169,7 @@ function showGameResult () {
   }
 }
 
-// Card click event handler
+// Assign click event listener to all cards
  $('.flippable').on('click', function () {
    handleClick($(this));
  });
@@ -177,7 +180,7 @@ function handleClick(obj) {
    showCard(obj);
  } else {
    showCard(obj);
-   $('.flippable').off();
+   $('.flippable').off(); // remove event listener from all cards so user cant keep clicking
    if (cardsFlipped[0] === cardsFlipped[1] && cardIDs[0] !== cardIDs[1]) {
      $('.open').removeClass('flippable');
      matches.push(cardIDs);
