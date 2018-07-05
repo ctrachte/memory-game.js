@@ -20,6 +20,8 @@ function resetBoard () {
 
   setTimer();
 
+  clearTimeout();
+
   $('.card').removeClass('red');
 
   $('.card').removeClass('green');
@@ -184,17 +186,15 @@ function showGameResult () {
 function handleClick(obj) {
  if (cardsFlipped.length===0) {
    showCard(obj);
+   $(obj).off(); // remove event listener so user cant keep clicking
  } else {
    showCard(obj);
-   $('.flippable').off(); // remove event listener from all cards so user cant keep clicking
+   $('.flippable').off();// remove all event listeners to prevent flipping more than 2
    if (cardsFlipped[0] === cardsFlipped[1] && cardIDs[0] !== cardIDs[1]) {
      $('.open').removeClass('flippable');
      $('.open').addClass('green');
      matches.push(cardIDs);
      hideCards();
-   } else if (cardIDs[0] === cardIDs[1]){
-     setTimeout(hideCards,1000);
-     $('.open').addClass('red');
    } else {
      $('.open').addClass('red');
      setTimeout(hideCards,1000);
