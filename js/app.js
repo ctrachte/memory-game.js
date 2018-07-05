@@ -173,7 +173,6 @@ function showGameResult () {
 
 // function that handles click
 function handleClick(obj) {
-  console.log(obj);
  if (cardsFlipped.length===0) {
    showCard(obj);
  } else {
