@@ -10,17 +10,14 @@ $('#newGameModal').click(function () {
   resetBoard();
 });
 
-// Assign click event listener to all cards
- $('.flippable').on('click', function () {
-   handleClick($(this));
- });
-
 // resets the entire game board
 function resetBoard () {
 
   setTimer();
 
   clearTimeout();
+
+  $('.flippable').off(); // clear out old event listeners
 
   $('.card').removeClass('red');
 
@@ -41,6 +38,11 @@ function resetBoard () {
     <li><i class="fa fa-star"></i></li>
     `
    );
+   // add back in the event listener to all cards
+   $('.flippable').on('click', function () {
+     handleClick($(this));
+   });
+
    moves = [9]; // reset moves
    cardIDs = [];
    cardsFlipped = [];
